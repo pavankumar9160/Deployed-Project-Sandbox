@@ -1,0 +1,297 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="dashboard-main-body">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+  <h6 class="fw-semibold mb-0">Raise A Request</h6>
+  <ul class="d-flex align-items-center gap-2">
+    <li class="fw-medium">
+      <a href="{%  url 'dashboard' %}" class="d-flex align-items-center gap-1 hover-text-primary">
+        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>-</li>
+    <li class="fw-medium">Raise A Request</li>
+  </ul>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">Raise Request</h5>
+  </div>
+  <div class="card-body">
+    <form class="row gy-3 needs-validation" novalidate>
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="f7:person"></iconify-icon>
+          </span>
+          <input type="text" name="name" id ="name" class="form-control" placeholder="Enter Name" required>
+          <div class="invalid-feedback">
+            Please provide name.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Approval Person</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="f7:person"></iconify-icon>
+          </span>
+          <input type="text" name="approval_person" id = "approval_person" class="form-control" placeholder="Enter Approval Person Name" required>
+          <div class="invalid-feedback">
+            Please provide approval person name.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Module Type</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="ic:baseline-arrow-drop-down"></iconify-icon>
+          </span>
+          <select class="form-control required" id = "module_type" name="module_type" required>
+            <option value="">Module Type</option>
+            <option value="1">Internal</option>
+            <option value="2">External</option>
+          </select>
+          <div class="invalid-feedback">
+            Please provide the Request Type.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Request Type</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="ic:baseline-arrow-drop-down"></iconify-icon>
+          </span>
+          <select class="form-control required" id ='request_type' name="request_type" required>
+            <option value="1">Request Type</option>
+            <option value="1">Error</option>
+            <option value="2">Authorization</option>
+            <option value="3">Additions / Improvement</option>
+            <option value="4">New Report</option>
+            <option value="5">New Project</option>
+            <option value="6">Project New Version</option>
+          </select>
+          <div class="invalid-feedback">
+            Please provide the Request Type.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Requested Date</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:calendar"></iconify-icon>
+          </span>
+          <input type="date" id='requested_date' name="requested_date" class="form-control" required>
+          <div class="invalid-feedback">
+            Please provide requested date.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Request Description</label>
+        <div class="icon-field has-validation">
+            <span class="icon">
+                <iconify-icon icon="mdi:note-text"></iconify-icon>
+            </span>
+            <textarea class="form-control" id = "request_description" name="request_description" placeholder="Enter description" required></textarea>
+            <div class="invalid-feedback">
+                Please provide a description.
+            </div>
+        </div>
+      </div>
+    <div class="col-md-6">
+      <label class="form-label">Attachments</label>
+      <div class="icon-field has-validation">
+          <span class="icon">
+              <iconify-icon icon="mdi:file-upload"></iconify-icon>
+          </span>
+          <input type="file" class="form-control" id="attachments" name="attachments" required>
+          <div class="invalid-feedback">
+              Please upload related files/documents.
+          </div>
+          </div>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary-600" id="submit" type="submit">Submit form</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+  <footer class="d-footer">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+      </div>
+      <div class="col-auto">
+        <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+      </div>
+    </div>
+  </footer>
+  </main>
+    
+    <!-- jQuery library js -->
+    <script src="{%  static 'js/lib/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{%  static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <!-- Apex Chart js -->
+    <!-- <script src="{%  static 'js/lib/apexcharts.min.js' %}"></script> -->
+    <script src="https://cdn.js' %}delivr.net/npm/apexcharts"></script>
+    <!-- Data Table js -->
+    <script src="{%  static 'js/lib/dataTables.min.js' %}"></script>
+    <!-- Iconify Font js -->
+    <script src="{%  static 'js/lib/iconify-icon.min.js' %}"></script>
+    <!-- jQuery UI js -->
+    <script src="{%  static 'js/lib/jquery-ui.min.js' %}"></script>
+    <!-- Vector Map js -->
+    <script src="{%  static 'js/lib/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <script src="{%  static 'js/lib/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- Popup js -->
+    <script src="{%  static 'js/lib/magnifc-popup.min.js' %}"></script>
+    <!-- Slick Slider js -->
+    <script src="{%  static 'js/lib/slick.min.js' %}"></script>
+    <!-- prism js -->
+    <script src="{%  static 'js/lib/prism.js' %}"></script>
+    <!-- file upload js -->
+    <script src="{%  static 'js/lib/file-upload.js' %}"></script>
+    <!-- audioplayer -->
+    <script src="{%  static 'js/lib/audioplayer.js' %}"></script>
+    
+    <!-- main js -->
+    <script src="{%  static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+       
+
+        $(document).ready(function() {
+            $('#submit').on('click', function(event) {
+        
+              event.preventDefault();
+
+              var form = document.querySelector('.needs-validation');
+      
+              if (!form.checkValidity()) {
+                  form.classList.add('was-validated'); // Apply Bootstrap validation styles
+                  return; // Stop the submission if the form is invalid
+              }
+        
+                  var name = $('#name').val();
+                  var approval_person = $('#approval_person').val();
+                  var module_type = $('#module_type').val();
+                  var request_type = $('#request_type').val();
+                  var requested_date = $('#requested_date').val();
+                  var request_description = $('#request_description').val();
+                  var attachments = $('#attachments').val();
+        
+                 
+                 
+        
+                  
+        
+                if(!name || !approval_person || !module_type || !request_type || !requested_date || !request_description || !attachments){
+        
+                    return
+                }
+                // Create a FormData object
+                var formData = new FormData(); // Initialize an empty FormData object
+        
+                // Append form data manually
+                formData.append('rqstnr', $('#name').val());
+                formData.append('approve_by', $('#approval_person').val());
+                formData.append('module', $('#module_type').val());
+                formData.append('reqt_type', $('#request_type').val());
+                formData.append('rqstd_date', $('#requested_date').val());
+                formData.append('desc', $('#request_description').val());
+               
+               
+                // Append file inputs
+                var fileInputs = ['attachments'];
+                
+                fileInputs.forEach(function(id) {
+                    var fileInput = document.getElementById(id);
+                    if (fileInput.files.length > 0) {
+                        formData.append('attach_file_original', fileInput.files[0]);
+                    }
+                });
+        
+                // Debugging FormData contents
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+        
+                // Send data via AJAX
+                $.ajax({
+                    url: '/raise_request_api/', // API endpoint
+                    type: 'POST',
+                    data: formData, // Use FormData object
+                    processData: false, // Prevent jQuery from automatically processing the data
+                    contentType: false, // Prevent jQuery from setting the content type
+                    success: function(response) {
+                        console.log("response",response)
+                        // Handle success response
+                        toastr.success('Request raised successfully!','Success');
+
+                        const inputFields = [
+                          "name", "approval_person", "module_type", "request_type", "requested_date",
+                          "request_description", "attachments"
+                      ];
+                      inputFields.forEach(fieldId => {
+      
+                          allfields = document.getElementById(fieldId);
+                              allfields.value ="";
+                         
+                      });
+        
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("error",error)
+                        console.log("status",status)
+                        console.log("xhr",xhr)
+                        // Handle error response
+                        var errors =xhr.responseJSON
+                        console.log(errors)
+                        var firstKey = Object.keys(errors)[0];
+                        var firstError = errors[firstKey][0];
+                        console.log(firstError)
+                       
+                      
+                        
+                       toastr.error(firstError, 'Error');
+                       toastr.options = {
+                        "closeButton": true,            // Show close button
+                        "debug": false,                 // Enable debug mode
+                        "newestOnTop": true,            // Show new notifications on top
+                        "progressBar": true,            // Show progress bar
+                        "positionClass": "toast-top-right", // Position of the toast
+                        "preventDuplicates": false,     // Prevent duplicate notifications
+                        "onclick": null,                // Add a click handler
+                        "showDuration": "300",          // How long to show the notification
+                        "hideDuration": "1000",         // How long it takes to hide
+                        "timeOut": "5000",              // How long the toast remains visible
+                        "extendedTimeOut": "1000",      // How long to show after mouse hover
+                        "showEasing": "swing",          // Show animation
+                        "hideEasing": "linear",         // Hide animation
+                        "showMethod": "fadeIn",         // Animation when showing
+                        "hideMethod": "fadeOut"         // Animation when hiding
+                    };
+                    
+                    }
+                });
+            });
+        });
+      </script>
+      </body>
+      </html>
+      {% endblock %}
+  

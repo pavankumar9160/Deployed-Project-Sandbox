@@ -1,0 +1,31 @@
+.input-group {
+    position: relative;
+}
+
+.input-group-append {
+    position: absolute !important;
+    right: 30px !important;
+    top: 6px !important;
+    border: transparent;
+    z-index: 99;
+}
+
+.input-group-text {
+    border: none;
+}
+
+#password {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+#confirmpassword {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+.invalid-feedback {
+    color: #ffff00;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}

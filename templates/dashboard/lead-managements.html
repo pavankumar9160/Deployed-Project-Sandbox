@@ -1,0 +1,382 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="dashboard-main-body">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+  <h6 class="fw-semibold mb-0">Lead Managements</h6>
+  <ul class="d-flex align-items-center gap-2">
+    <li class="fw-medium">
+      <a href="{%  url 'dashboard' %}" class="d-flex align-items-center gap-1 hover-text-primary">
+        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>-</li>
+    <li class="fw-medium">Lead Managements</li>
+  </ul>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">Lead Managements</h5>
+  </div>
+  <div class="card-body">
+    <form class="row gy-3 needs-validation" novalidate>
+      
+      <div class="col-md-6">
+        <label class="form-label">Sources Of Leads</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="f7:person"></iconify-icon>
+          </span>
+          <input type="text" name="sources_of_leads" id = "sources_of_leads" class="form-control" placeholder="Enter Sources Of Leads" required>
+          <div class="invalid-feedback">
+            Please provide sources of leads.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Bussiness Name</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:office-building"></iconify-icon>
+          </span>
+          <input type="text" name="bussiness_name" id ="bussiness_name" class="form-control" placeholder="Enter Bussiness Name" required>
+          <div class="invalid-feedback">
+            Please provide bussiness name.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Bussiness Type</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:office-building"></iconify-icon>
+          </span>
+          <input type="text" name="bussiness_type" id ="bussiness_type" class="form-control" placeholder="Enter Bussiness Type" required>
+          <div class="invalid-feedback">
+            Please provide bussiness type.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Contact Number</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:phone"></iconify-icon>
+          </span>
+          <input type="number" name="contact_number" id ="contact_number" class="form-control" placeholder="Enter Contact Number" required>
+          <div class="invalid-feedback">
+            Please provide contact number.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Alternate Contact Number</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:phone"></iconify-icon>
+          </span>
+          <input type="number" name="alternate_contact_number" id ="alternate_contact_number" class="form-control" placeholder="Enter Alternate Contact Number" required>
+          <div class="invalid-feedback">
+            Please provide alternate contact number.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Call Connected</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:phone"></iconify-icon>
+          </span>
+          <input type="text" name="call_connected" id ="call_connected" class="form-control" placeholder="Enter Call Connected" required>
+          <div class="invalid-feedback">
+            Please provide Call Connected.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Contact Person</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="f7:person"></iconify-icon>
+          </span>
+          <input type="text" name="contact_person" id = "contact_person" class="form-control" placeholder="Enter Contact Person Name" required>
+          <div class="invalid-feedback">
+            Please provide contact person.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">State</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:map-marker-outline"></iconify-icon>
+          </span>
+          <input type="text" name="state" id = "state" class="form-control" placeholder="Enter State Name" required>
+          <div class="invalid-feedback">
+            Please provide state.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">City</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:city"></iconify-icon>
+          </span>
+          <input type="text" name="city" id = "city" class="form-control" placeholder="Enter City Name" required>
+          <div class="invalid-feedback">
+            Please provide city.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Full Address</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="ic:baseline-location-on"></iconify-icon>
+        </span>
+          <input type="text" name="full_address" id = "full_address" class="form-control" placeholder="Enter Full Address" required>
+          <div class="invalid-feedback">
+            Please provide full address.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:email"></iconify-icon>
+        </span>
+          <input type="email" name="email" id = "email" class="form-control" placeholder="Enter Email ID" required>
+          <div class="invalid-feedback">
+            Please provide Email id.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Remarks</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:comment-text-outline"></iconify-icon>
+        </span>
+          <input type="text" name="remarks" id = "remarks" class="form-control" placeholder="Enter Remarks" required>
+          <div class="invalid-feedback">
+            Please provide remarks.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Client Behaviour</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="ic:baseline-arrow-drop-down"></iconify-icon>
+          </span>
+          <select class="form-control required" id = "client_behaviour" name="client_behaviour" required>
+            <option value="">Client Behaviour</option>
+            <option value="1">Positive</option>
+            <option value="2">Negative</option>
+            <option value="3">Neutral</option>
+            <option value="4">Others</option>
+          </select>
+          <div class="invalid-feedback">
+            Please provide the client behaviour.
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Employee Code</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="f7:person"></iconify-icon>
+          </span>
+          <input type="text" name="emp_code" id = "emp_code" class="form-control" placeholder="Enter Employee Code" required>
+          <div class="invalid-feedback">
+            Please provide employee code.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary-600" id="submit" type="submit">Submit form</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+  <footer class="d-footer">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+      </div>
+      <div class="col-auto">
+        <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+      </div>
+    </div>
+  </footer>
+  </main>
+    
+    <!-- jQuery library js -->
+    <script src="{%  static 'js/lib/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{%  static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <!-- Apex Chart js -->
+    <!-- <script src="{%  static 'js/lib/apexcharts.min.js' %}"></script> -->
+    <script src="https://cdn.js' %}delivr.net/npm/apexcharts"></script>
+    <!-- Data Table js -->
+    <script src="{%  static 'js/lib/dataTables.min.js' %}"></script>
+    <!-- Iconify Font js -->
+    <script src="{%  static 'js/lib/iconify-icon.min.js' %}"></script>
+    <!-- jQuery UI js -->
+    <script src="{%  static 'js/lib/jquery-ui.min.js' %}"></script>
+    <!-- Vector Map js -->
+    <script src="{%  static 'js/lib/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <script src="{%  static 'js/lib/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- Popup js -->
+    <script src="{%  static 'js/lib/magnifc-popup.min.js' %}"></script>
+    <!-- Slick Slider js -->
+    <script src="{%  static 'js/lib/slick.min.js' %}"></script>
+    <!-- prism js -->
+    <script src="{%  static 'js/lib/prism.js' %}"></script>
+    <!-- file upload js -->
+    <script src="{%  static 'js/lib/file-upload.js' %}"></script>
+    <!-- audioplayer -->
+    <script src="{%  static 'js/lib/audioplayer.js' %}"></script>
+    
+    <!-- main js -->
+    <script src="{%  static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+       
+
+        $(document).ready(function() {
+            $('#submit').on('click', function(event) {
+        
+              event.preventDefault();
+
+              var form = document.querySelector('.needs-validation');
+      
+              if (!form.checkValidity()) {
+                  form.classList.add('was-validated'); // Apply Bootstrap validation styles
+                  return; // Stop the submission if the form is invalid
+              }
+        
+                  var sources_of_leads = $('#sources_of_leads').val();
+                  var bussiness_name = $('#bussiness_name').val();
+                  var bussiness_type = $('#bussiness_type').val();
+                  var contact_number = $('#contact_number').val();
+                  var alternate_contact_number = $('#alternate_contact_number').val();
+                  var call_connected = $('#call_connected').val();
+                  var contact_person = $('#contact_person').val();
+                  var state = $('#state').val();
+                  var city = $('#city').val();
+                  var full_address = $('#full_address').val();
+                  var email = $('#email').val();
+                  var remarks = $('#remarks').val();
+                  var client_behaviour = $('#client_behaviour').val();
+                  var emp_code = $('#emp_code').val();
+                 
+        
+                 
+                 
+        
+                  
+        
+                if(!sources_of_leads || !bussiness_name || !bussiness_type || !contact_number || !alternate_contact_number || !call_connected || !contact_person || !state  || !city  || !full_address  || !email ||  !remarks || !client_behaviour || !emp_code ){
+        
+                    return
+                }
+                // Create a FormData object
+                var formData = new FormData(); // Initialize an empty FormData object
+        
+                // Append form data manually
+                formData.append('sources_of_leads', $('#sources_of_leads').val());
+                formData.append('bussiness_name', $('#bussiness_name').val());
+                formData.append('bussiness_type', $('#bussiness_type').val());
+                formData.append('contact_number', $('#contact_number').val());
+                formData.append('alternate_contact_number', $('#alternate_contact_number').val());
+                formData.append('call_connected', $('#call_connected').val());
+                formData.append('contact_person', $('#contact_person').val());
+                formData.append('state', $('#state').val());
+                formData.append('city', $('#city').val());
+                formData.append('full_address', $('#full_address').val());
+                formData.append('email', $('#email').val());
+                formData.append('remarks', $('#remarks').val());
+                formData.append('client_behaviour', $('#client_behaviour').val());
+                formData.append('emp_code', $('#emp_code').val());
+               
+        
+                // Debugging FormData contents
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+        
+                // Send data via AJAX
+                $.ajax({
+                    url: '/lead_managements_api/', // API endpoint
+                    type: 'POST',
+                    data: formData, // Use FormData object
+                    processData: false, // Prevent jQuery from automatically processing the data
+                    contentType: false, // Prevent jQuery from setting the content type
+                    success: function(response) {
+                        console.log("response",response)
+                        // Handle success response
+                        toastr.success('data submitted successfully!','Success');
+
+                        const inputFields = [
+                          "sources_of_leads", "bussiness_name", "bussiness_type", "contact_number", "alternate_contact_number",
+                          "call_connected", "contact_person","state","city","full_address","email","remarks","client_behaviour","emp_code"
+                      ];
+                      inputFields.forEach(fieldId => {
+      
+                          allfields = document.getElementById(fieldId);
+                              allfields.value ="";
+                         
+                      });
+        
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("error",error)
+                        console.log("status",status)
+                        console.log("xhr",xhr)
+                        // Handle error response
+                        var errors =xhr.responseJSON
+                        console.log(errors)
+                        var firstKey = Object.keys(errors)[0];
+                        var firstError = errors[firstKey][0];
+                        console.log(firstError)
+                       
+                      
+                        
+                       toastr.error(firstError, 'Error');
+                       toastr.options = {
+                        "closeButton": true,            // Show close button
+                        "debug": false,                 // Enable debug mode
+                        "newestOnTop": true,            // Show new notifications on top
+                        "progressBar": true,            // Show progress bar
+                        "positionClass": "toast-top-right", // Position of the toast
+                        "preventDuplicates": false,     // Prevent duplicate notifications
+                        "onclick": null,                // Add a click handler
+                        "showDuration": "300",          // How long to show the notification
+                        "hideDuration": "1000",         // How long it takes to hide
+                        "timeOut": "5000",              // How long the toast remains visible
+                        "extendedTimeOut": "1000",      // How long to show after mouse hover
+                        "showEasing": "swing",          // Show animation
+                        "hideEasing": "linear",         // Hide animation
+                        "showMethod": "fadeIn",         // Animation when showing
+                        "hideMethod": "fadeOut"         // Animation when hiding
+                    };
+                    
+                    }
+                });
+            });
+        });
+      </script>
+      </body>
+      </html>
+      {% endblock %}
+  

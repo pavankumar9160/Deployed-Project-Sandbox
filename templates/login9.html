@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iofrm</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme9.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom-style-login.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="form-body">
+        <div class="iofrm-layout">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <h3>Streamline Your Workflow with Our Internal Management System</h3>
+<p>Empower our team with a cutting-edge platform designed for seamless employee management and innovation.</p>
+
+                    <img src="{% static 'images/graphic5.svg' %}" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="index.html">
+                                <div class="logo">
+                                    <img class="logo-size" src="{% static 'images/logo-light.svg' %}" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="page-links">
+                            <a href="{% url 'login' %}" class="active">Login</a><a
+                                href="{% url 'register' %}">Register</a>
+                        </div>
+                        <form id="loginForm">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email">Email ID</label>
+                                <input type="email" id="email" name="username" class="form-control required" placeholder="Email ID">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="password" name="password" class="form-control required" placeholder="Password">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" onclick="togglePasswordVisibility('password')">
+                                            <i class="fa fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Login</button>
+                                <a href="forget9.html">Forget password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/custom-login-js.js' %}"></script>
+    <script src="{% static 'js/registration_wizard_func.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        // Function to get the CSRF token from the cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        $(document).ready(function () {
+            $('#loginForm').on('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                var username = $('input[name="username"]').val();
+                var password = $('input[name="password"]').val();
+
+                $.ajax({
+                    url: 'http://localhost:8000/login_api/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken // Include the CSRF token in the request headers
+                    },
+                    data: {
+                        mail_id: username,
+                        password: password
+                    },
+                    success: function (response) {
+                        console.log('Success:', response); // Log the response in case of success
+                        // Handle successful login (e.g., redirect to a dashboard)
+                        localStorage.setItem('refreshToken', response.refresh);
+                        localStorage.setItem('accessToken', response.access);
+                        window.location.href = '/dashboard/';
+                        toastr.success('Login successful!','Success');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr.responseText); // Log the response in case of an error
+                        // Handle login failure (e.g., show an error message)
+                         var errors =xhr.responseJSON
+                console.log(errors)
+                var firstKey = Object.keys(errors)[0];
+                var firstError = errors[firstKey][0];
+                console.log(firstError)
+               
+              
+                
+               toastr.error(firstError, 'Error');
+               toastr.options = {
+                "closeButton": true,            // Show close button
+                "debug": false,                 // Enable debug mode
+                "newestOnTop": true,            // Show new notifications on top
+                "progressBar": true,            // Show progress bar
+                "positionClass": "toast-top-right", // Position of the toast
+                "preventDuplicates": false,     // Prevent duplicate notifications
+                "onclick": null,                // Add a click handler
+                "showDuration": "300",          // How long to show the notification
+                "hideDuration": "1000",         // How long it takes to hide
+                "timeOut": "5000",              // How long the toast remains visible
+                "extendedTimeOut": "1000",      // How long to show after mouse hover
+                "showEasing": "swing",          // Show animation
+                "hideEasing": "linear",         // Hide animation
+                "showMethod": "fadeIn",         // Animation when showing
+                "hideMethod": "fadeOut"         // Animation when hiding
+            };
+                
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

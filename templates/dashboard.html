@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    #loading{
+        display: flex;
+    }
+</style>
+<body>
+    <header>
+        <!-- Header content here -->
+    </header>
+    
+    <main id="main-content" style="display:none;">
+        <h1>Welcome to the Dashboard</h1>
+        <p>Here is some protected content only visible to authenticated users.</p>
+        
+        <!-- Example of displaying user-specific data -->
+        <div>
+            <h2>Your Data:</h2>
+            <p id="user-data">Loading...</p>
+        </div>
+    </main>
+    
+    <div id="loading" class="justify-content-center align-items-center" style="height: 100vh;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        function getTokenFromLocalStorage() {
+            return localStorage.getItem('accessToken');
+        }
+
+        async function checkAuthentication() {
+            const token = getTokenFromLocalStorage(); // Retrieve the access token
+
+            try {
+                const response = await fetch('/api/user-data/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    // User is authenticated
+                    const data = await response.json();
+                    document.getElementById('user-data').textContent = JSON.stringify(data);
+                    document.getElementById('main-content').style.display = 'block'; // Show the content
+                } else {
+                    // Redirect to login page if not authenticated
+                    window.location.href = '/';
+                }
+            } catch (error) {
+                console.error('Error checking authentication:', error);
+                window.location.href = '/';
+            } finally {
+                // Hide the loading spinner and show the content (if authenticated)
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Call the function to check authentication when the page loads
+        document.addEventListener('DOMContentLoaded', checkAuthentication);
+    </script>
+</body>
+</html>

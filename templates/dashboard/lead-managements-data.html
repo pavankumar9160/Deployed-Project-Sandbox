@@ -1,0 +1,255 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="dashboard-main-body">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+  <h6 class="fw-semibold mb-0">Lead managements data</h6>
+  <ul class="d-flex align-items-center gap-2">
+    <li class="fw-medium">
+      <a href="{%  url 'dashboard' %}" class="d-flex align-items-center gap-1 hover-text-primary">
+        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>-</li>
+    <li class="fw-medium">Lead managements data</li>
+  </ul>
+</div>
+<div class="card">
+    <div class="card-header">
+      <h5 class="card-title mb-0">Lead Managements</h5>
+    </div>
+    <div class="card-body">
+      <form class="row gy-3 needs-validation" novalidate>
+        <div class="col-md-6">
+          <label class="form-label">Employee Code</label>
+          <div class="icon-field has-validation">
+            <span class="icon">
+              <iconify-icon icon="ic:baseline-arrow-drop-down"></iconify-icon>
+            </span>
+            <select class="form-control required" id = "emp_code" name="emp_code" required>
+                <option value="">select employee code</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide the Employee Code.
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Time Stamp</label>
+        <div class="icon-field has-validation">
+          <span class="icon">
+            <iconify-icon icon="mdi:calendar-clock"></iconify-icon>
+          </span>
+          <input type="date" name="timestamp" id="timestamp" class="form-control" placeholder="Enter Date" required>
+          <div class="invalid-feedback">
+            Please provide the timestamp.
+          </div>
+        </div>
+    </div>
+        <div class="col-md-12">
+          <button class="btn btn-primary-600" id="submit" type="submit">Submit form</button>
+        </div>
+      </form>
+    </div>
+  </div>
+ <div class="container">
+    <div class="table-responsive">
+    <table class="table table-bordered" style="width:2500px">
+        <thead>
+            <tr>
+              
+                <th>Sources of Leads</th>
+                <th>Bussiness Name</th>
+                <th>Bussiness Type</th>
+                <th>Contact Number</th>
+                <th>Alternate Contact Number</th>
+                <th>Call Connected</th>
+                <th>Contact Person</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Full Address</th>
+                <th>Email ID</th>
+                <th>Remarks</th>
+                <th>Client Behaviour</th>
+                <th>Employee Code</th>
+                <th>TimeStamp</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+        </tbody>
+    </table>
+</div>
+</div>
+ 
+
+  
+  
+
+<footer class="d-footer">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+      </div>
+      <div class="col-auto">
+        <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+      </div>
+    </div>
+  </footer>
+  </main>
+    
+    <!-- jQuery library js -->
+    <script src="{%  static 'js/lib/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{%  static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <!-- Apex Chart js -->
+    <!-- <script src="{%  static 'js/lib/apexcharts.min.js' %}"></script> -->
+    <script src="https://cdn.js/delivr.net/npm/apexcharts"></script>
+    <!-- Data Table js -->
+    <script src="{%  static 'js/lib/dataTables.min.js' %}"></script>
+    <!-- Iconify Font js -->
+    <script src="{%  static 'js/lib/iconify-icon.min.js' %}"></script>
+    <!-- jQuery UI js -->
+    <script src="{%  static 'js/lib/jquery-ui.min.js' %}"></script>
+    <!-- Vector Map js -->
+    <script src="{%  static 'js/lib/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <script src="{%  static 'js/lib/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- Popup js -->
+    <script src="{%  static 'js/lib/magnifc-popup.min.js' %}"></script>
+    <!-- Slick Slider js -->
+    <script src="{%  static 'js/lib/slick.min.js' %}"></script>
+    <!-- prism js -->
+    <script src="{%  static 'js/lib/prism.js' %}"></script>
+    <!-- file upload js -->
+    <script src="{%  static 'js/lib/file-upload.js' %}"></script>
+    <!-- audioplayer -->
+    <script src="{%  static 'js/lib/audioplayer.js' %}"></script>
+    
+    <!-- main js -->
+    <script src="{%  static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+
+            url: '/get_lead_managements_data/',  
+            method: 'GET',
+            success: function (data) {
+                console.log(data);
+                const empCodeSelectBox = $('#emp_code');
+               
+                data.forEach(function (item) {
+                    const Empcodeoptions = `
+                    <option value="${item.emp_code}">${item.emp_code}</option>
+                    `;
+
+                    empCodeSelectBox.append(Empcodeoptions);
+
+                })
+            },
+                error:  function (error) {
+                    console.error("Error fetching data:", error);
+                }   
+        })
+    })
+
+    $("#submit").on('click',function(event){
+        event.preventDefault();
+            var emp_code = $('#emp_code').val();
+            var timestamp = $('#timestamp').val();
+        
+            if (!emp_code) {
+               
+                $('#emp_code').siblings('.invalid-feedback').show();
+                return;
+            } else {
+                $('#emp_code').siblings('.invalid-feedback').hide();
+            }
+
+        $.ajax({
+
+            url: '/get_lead_managements_data/',  
+            method: 'POST',
+            data:{emp_code:emp_code, timestamp:timestamp},
+            success: function (data) {
+                const tableBody = $('#data-table-body');
+                console.log(data);
+                if(data && data.length > 0){
+              
+                tableBody.empty();
+                data.forEach(function (item) {
+
+                        if(item.client_behaviour=== 1){
+                            item.client_behaviour ="Positive";
+                        }
+                        else if(item.client_behaviour=== 2){
+                            item.client_behaviour ="Negative";
+                        }
+                        else if(item.client_behaviour=== 3){
+                            item.client_behaviour ="Neutral";
+                        }
+                        else if(item.client_behaviour=== 4){
+                            item.client_behaviour ="Others";
+                        }
+
+                    const row = `
+                    <tr>
+                        
+                        <td>${item.sources_of_leads}</td>
+                        <td>${item.bussiness_name}</td>
+                        <td> ${item.bussiness_type} </td>
+                        <td>${item.contact_number}</td>
+                        <td>${item.alternate_contact_number}</td>
+                        <td>${item.call_connected}</td>
+                         <td>${item.contact_person}</td>
+                          <td>${item.state}</td>
+                           <td>${item.city}</td>
+                            <td>${item.full_address}</td>
+                             <td>${item.email}</td>
+                              <td>${item.remarks}</td>
+                               <td>${item.client_behaviour}</td>
+                                 <td>${item.emp_code}</td>
+                              <td>${item.timestamp}</td>
+                               <td>${item.status}</td>
+  
+                    </tr>
+                `;
+                tableBody.append(row);
+
+                })
+            }
+            else{
+                tableBody.empty();
+                    const row = `<tr>
+                        <td colspan="16" class="text-center">No Data Available</td>
+                                </tr>` ;
+                     tableBody.append(row);        
+
+            }
+            },
+                error:  function (error) {
+                    console.error("Error fetching data:", error);
+                }   
+        })
+        
+    })
+
+
+    
+</script>
+</body>
+</html>
+
+
+
+
+    {%endblock%}

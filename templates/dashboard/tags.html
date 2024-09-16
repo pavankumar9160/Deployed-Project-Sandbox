@@ -1,0 +1,211 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="dashboard-main-body">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+  <h6 class="fw-semibold mb-0">Tags</h6>
+  <ul class="d-flex align-items-center gap-2">
+    <li class="fw-medium">
+      <a href="{%  url 'dashboard' %}" class="d-flex align-items-center gap-1 hover-text-primary">
+        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>-</li>
+    <li class="fw-medium">Components / Tags</li>
+  </ul>
+</div>
+        <div class="row gy-4">
+            <div class="col-sm-6">
+                <div class="card h-100 p-0">
+                    <div class="card-header border-bottom bg-base py-16 px-24">
+                    <h6 class="text-lg fw-semibold mb-0">Default Tags</h6>
+                    </div>
+                    <div class="card-body p-24">
+                        <ul class="d-flex flex-wrap align-items-center gap-32">
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                        </ul>
+                        <ul class="tag-list d-flex flex-wrap align-items-center gap-20 mt-20">
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card h-100 p-0">
+                    <div class="card-header border-bottom bg-base py-16 px-24">
+                    <h6 class="text-lg fw-semibold mb-0">Colors tags</h6>
+                    </div>
+                    <div class="card-body p-24">
+                        <ul class="d-flex flex-wrap align-items-center gap-32">
+                            <li class="text-white bg-primary-600 border border-primary-600 radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                            <li class="text-white bg-lilac-600 border border-lilac-600 radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                            <li class="text-white bg-warning-600 border border-warning-600 radius-4 px-8 py-4 text-sm line-height-1 fw-medium">Label</li>
+                        </ul>
+                        <ul class="tag-list d-flex flex-wrap align-items-center gap-20 mt-20">
+                            <li class="text-primary-600 border border-primary-600 radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-lilac-600 border border-lilac-600 radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-warning-600 border border-warning-600 radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card h-100 p-0">
+                    <div class="card-header border-bottom bg-base py-16 px-24">
+                    <h6 class="text-lg fw-semibold mb-0">Tags With Image</h6>
+                    </div>
+                    <div class="card-body p-24">
+                        <ul class="d-flex flex-wrap align-items-center gap-20 mt-20">
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                            </li>
+                        </ul>
+                        <ul class="tag-list d-flex flex-wrap align-items-center gap-20 mt-20">
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <img src="{%  static 'images/flags/flag-tag.png' %}" class="w-16-px h-16-px rounded-circle" alt="">
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card h-100 p-0">
+                    <div class="card-header border-bottom bg-base py-16 px-24">
+                    <h6 class="text-lg fw-semibold mb-0">Tags Indicator </h6>
+                    </div>
+                    <div class="card-body p-24">
+                        <ul class="d-flex flex-wrap align-items-center gap-32">
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-4 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                            </li>
+                        </ul>
+                        <ul class="tag-list d-flex flex-wrap align-items-center gap-20 mt-20">
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                            <li class="text-secondary-light border radius-4 px-8 py-2 text-sm line-height-1 fw-medium d-flex align-items-center gap-1">
+                                <span class="w-8-px h-8-px bg-success-main rounded-circle"></span>
+                                Label
+                                <button class="remove-tag text-lg d-flex justify-content-center align-items-center" type="button"><iconify-icon icon="iconamoon:sign-times-light" class="icon line-height-1"></iconify-icon></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <footer class="d-footer">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-auto">
+      <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+    </div>
+    <div class="col-auto">
+      <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+    </div>
+  </div>
+</footer>
+</main>
+  
+  <!-- jQuery library js -->
+  <script src="{%  static 'js/lib/jquery-3.7.1.min.js' %}"></script>
+  <!-- Bootstrap js -->
+  <script src="{%  static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+  <!-- Apex Chart js -->
+  <!-- <script src="{%  static 'js/lib/apexcharts.min.js' %}"></script> -->
+  <script src="https://cdn.js' %}delivr.net/npm/apexcharts"></script>
+  <!-- Data Table js -->
+  <script src="{%  static 'js/lib/dataTables.min.js' %}"></script>
+  <!-- Iconify Font js -->
+  <script src="{%  static 'js/lib/iconify-icon.min.js' %}"></script>
+  <!-- jQuery UI js -->
+  <script src="{%  static 'js/lib/jquery-ui.min.js' %}"></script>
+  <!-- Vector Map js -->
+  <script src="{%  static 'js/lib/jquery-jvectormap-2.0.5.min.js' %}"></script>
+  <script src="{%  static 'js/lib/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <!-- Popup js -->
+  <script src="{%  static 'js/lib/magnifc-popup.min.js' %}"></script>
+  <!-- Slick Slider js -->
+  <script src="{%  static 'js/lib/slick.min.js' %}"></script>
+  <!-- prism js -->
+  <script src="{%  static 'js/lib/prism.js' %}"></script>
+  <!-- file upload js -->
+  <script src="{%  static 'js/lib/file-upload.js' %}"></script>
+  <!-- audioplayer -->
+  <script src="{%  static 'js/lib/audioplayer.js' %}"></script>
+  
+  <!-- main js -->
+  <script src="{%  static 'js/app.js' %}"></script>
+
+<script>
+    $('.remove-tag').on('click', function () {
+        $(this).closest('li').remove();
+    });
+</script>
+
+</body>
+</html>
+{% endblock %}

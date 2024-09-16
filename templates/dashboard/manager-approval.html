@@ -1,0 +1,291 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="dashboard-main-body">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+  <h6 class="fw-semibold mb-0">Manager Approval</h6>
+  <ul class="d-flex align-items-center gap-2">
+    <li class="fw-medium">
+      <a href="{%  url 'dashboard' %}" class="d-flex align-items-center gap-1 hover-text-primary">
+        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>-</li>
+    <li class="fw-medium">Manager Approval</li>
+  </ul>
+</div>
+<div class="container">
+    <div class="table-responsive">
+    <table class="table table-bordered" style="width:2500px">
+        <thead>
+            <tr>
+              
+                <th>Name</th>
+                <th>Request Description</th>
+                <th>Module Type</th>
+                <th>Request Type</th>
+                <th>Requested Date</th>
+                <th>Attachments</th>
+                <th>Remarks</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+        </tbody>
+    </table>
+</div>
+</div>
+<!-- Modal Structure -->
+<div id="imageModal" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Image Preview</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="Image" style="width:100%;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  
+
+<footer class="d-footer">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-auto">
+        <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+      </div>
+      <div class="col-auto">
+        <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+      </div>
+    </div>
+  </footer>
+  </main>
+    
+    <!-- jQuery library js -->
+    <script src="{%  static 'js/lib/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{%  static 'js/lib/bootstrap.bundle.min.js' %}"></script>
+    <!-- Apex Chart js -->
+    <!-- <script src="{%  static 'js/lib/apexcharts.min.js' %}"></script> -->
+    <script src="https://cdn.js/delivr.net/npm/apexcharts"></script>
+    <!-- Data Table js -->
+    <script src="{%  static 'js/lib/dataTables.min.js' %}"></script>
+    <!-- Iconify Font js -->
+    <script src="{%  static 'js/lib/iconify-icon.min.js' %}"></script>
+    <!-- jQuery UI js -->
+    <script src="{%  static 'js/lib/jquery-ui.min.js' %}"></script>
+    <!-- Vector Map js -->
+    <script src="{%  static 'js/lib/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <script src="{%  static 'js/lib/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- Popup js -->
+    <script src="{%  static 'js/lib/magnifc-popup.min.js' %}"></script>
+    <!-- Slick Slider js -->
+    <script src="{%  static 'js/lib/slick.min.js' %}"></script>
+    <!-- prism js -->
+    <script src="{%  static 'js/lib/prism.js' %}"></script>
+    <!-- file upload js -->
+    <script src="{%  static 'js/lib/file-upload.js' %}"></script>
+    <!-- audioplayer -->
+    <script src="{%  static 'js/lib/audioplayer.js' %}"></script>
+    
+    <!-- main js -->
+    <script src="{%  static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+   
+    $(document).ready(function () {
+        $.ajax({
+            url: '/get_request_api/',  
+            method: 'GET',
+            success: function (data) {
+                console.log(data);
+                const tableBody = $('#data-table-body');
+                data.forEach(function (item) {
+
+                            if(item.module === 1){
+                                 item.module = "Internal"
+                            }
+                            else if(item.module === 2){
+                                item.module = "External"
+                           }
+
+                                    if(item.reqt_type === 1){
+                                        item.reqt_type = "Error"
+                                    }
+                                    else if(item.reqt_type === 2){
+                                        item.reqt_type = "Authorization"
+                                    }
+                                    else if(item.reqt_type === 3){
+                                        item.reqt_type = "Additions / Improvement"
+                                    }
+                                    else if(item.reqt_type === 4){
+                                        item.reqt_type = "New Report"
+                                    }
+                                    else if(item.reqt_type === 5){
+                                        item.reqt_type = "New Project"
+                                    }
+                                    else if(item.reqt_type === 6){
+                                        item.reqt_type = "Project New Version"
+                                    }
+
+                                    if(item.approve_sts === 0){
+                                      item.approve_sts = "Pending"
+                                 }
+                                 else if(item.approve_sts === 1){
+                                     item.approve_sts = "Approved"
+                                }
+                                else if(item.approve_sts === 2){
+                                  item.approve_sts = "Rejected"
+                             }
+                               
+
+                    const row = `
+                        <tr>
+                            <td id ="id" style="display:none">${item.id}</td>
+                            <td>${item.rqstnr}</td>
+                            <td>${item.desc}</td>
+                            <td> ${item.module} </td>
+                            <td>${item.reqt_type}</td>
+                            <td>${item.rqstd_date}</td>
+                            <td>${item.attach_file_original}<button type="button" class="btn btn-primary" onclick="viewImage('${item.attach_file_original}')" data-bs-toggle="modal" data-bs-target="#imageModal">View</button></td>
+                           <td>
+                                <textarea class="form-control remarks" placeholder="Enter remarks"  name="remarks" style= "height:20px">${item.rmrks}</textarea>
+                            </td>
+                            <td style="position:relative;width:300px">
+                                <select class="form-select approval_type"  name="approval_type" style="width:150px">
+                                    <option value ="">${item.approve_sts}</option>
+                                    <option value="1">Approve</option>
+                                    <option value="2">Reject</option>
+                                    <option value="4">Revert</option>
+                                </select>
+                                <button type="button" id ="submit" class="btn btn-primary submit" style="position:absolute; top:8px; left:180px;">submit</button>
+                            </td>
+                            
+                        </tr>
+                    `;
+                    tableBody.append(row);
+                });
+            },
+            error: function (error) {
+                console.error("Error fetching data:", error);
+            }
+        });
+    });
+
+    function viewImage(imagePath) {
+      document.getElementById('modalImage').src = imagePath;
+      var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+      myModal.show();
+    }
+    function closeModal() {
+      var myModal = bootstrap.Modal.getInstance(document.getElementById('imageModal'));
+      if (myModal) {
+        myModal.hide();
+      }
+  
+      // Forcefully remove any lingering modal backdrops
+      document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+        backdrop.classList.remove('show'); // Hide the backdrop
+        setTimeout(function() {
+          backdrop.remove(); // Remove the backdrop after fade out
+        }, 150); // Match the fade-out duration (Bootstrap's default is 150ms)
+      });
+    }
+
+
+
+
+  
+    $(document).on('click', '.submit', function() {
+      var $row = $(this).closest('tr'); // Get the closest table row
+      var id = $row.find('td[id="id"]').text().trim(); // Get the name from the row
+      var approval_type = $row.find('.approval_type').val(); // Get the approval type from the row
+      var remarks = $row.find('.remarks').val(); // Get the remarks from the row
+  
+      // Log for debugging
+      console.log("id:", id);
+      console.log("approval_type:", approval_type);
+      console.log("remarks:", remarks);
+  
+      // Validate fields
+      if (!approval_type || !remarks || !id) {
+          toastr.error('All fields are required.', 'Error');
+          return;
+      }
+  
+    
+  
+      // Send data via AJAX
+      $.ajax({
+          url: '/update_request/', // API endpoint
+          type: 'PUT',
+          data: JSON.stringify({id:id,approve_sts:approval_type, rmrks:remarks}), // Convert data to JSON string
+          processData: false, // Prevent jQuery from automatically processing the data
+          contentType: 'application/json', // Set the correct content type
+          success: function(response) {
+              console.log("response", response);
+              // Handle success response
+              toastr.success('Update successful!', 'Success');
+          },
+          error: function(xhr, status, error) {
+              console.log("error", error);
+              console.log("status", status);
+              console.log("xhr", xhr);
+  
+              // Handle error response
+              var errors = xhr.responseJSON;
+              if (errors) {
+                  var firstKey = Object.keys(errors)[0];
+                  var firstError = errors[firstKey][0];
+                  console.log(firstError);
+                  toastr.error(firstError, 'Error');
+              } else {
+                  toastr.error('An unexpected error occurred.', 'Error');
+              }
+  
+              toastr.options = {
+                  "closeButton": true,            
+                  "debug": false,                 
+                  "newestOnTop": true,            
+                  "progressBar": true,            
+                  "positionClass": "toast-top-right", 
+                  "preventDuplicates": false,     
+                  "onclick": null,                
+                  "showDuration": "300",          
+                  "hideDuration": "1000",         
+                  "timeOut": "5000",              
+                  "extendedTimeOut": "1000",      
+                  "showEasing": "swing",          
+                  "hideEasing": "linear",         
+                  "showMethod": "fadeIn",         
+                  "hideMethod": "fadeOut"         
+              };
+          }
+      });
+  });
+  
+  
+  
+</script>
+
+</body>
+</html>
+
+
+
+
+    {%endblock%}
